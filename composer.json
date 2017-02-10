@@ -1,22 +1,22 @@
 {
     "name": "ifeltsweet/laravel-redis",
-    "description": "Adds support for PhpRedis to Laravel and Lumen 4.x/5.x Edit",
+    "description": "Adds support for PhpRedis to Laravel and Lumen 4.x/5.x",
     "keywords": ["laravel", "lumen", "redis", "phpredis"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Denis Pshenov",
+            "name": "Denis Pshenov"
         }
     ],
     "require": {
         "php": ">=5.5.9",
         "ext-redis": "*",
         "illuminate/contracts": "5.*||4.*",
-        "illuminate/support": "5.*||4.*",
+        "illuminate/support": "5.*||4.*"
     },
     "autoload": {
         "psr-0": {
-            "LaravelRedis": "src/",
+            "LaravelRedis": "src/"
         }
-    },
+    }
 }
