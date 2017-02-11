@@ -2,7 +2,6 @@
 
 namespace LaravelRedis;
 
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Manager;
 use Redis;
 
@@ -11,9 +10,9 @@ class RedisManager extends Manager
     /**
      * Create a new manager instance.
      *
-     * @param \Illuminate\Contracts\Config\Repository $config
+     * @param array $config
      */
-    public function __construct(Repository $config)
+    public function __construct($config)
     {
         $this->config = $config;
     }
@@ -25,7 +24,7 @@ class RedisManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return 'php redis';
+        return 'PhpRedis';
     }
 
     /**
@@ -37,7 +36,7 @@ class RedisManager extends Manager
     {
         $redis = new Redis();
 
-        $config = $this->getDefaultConfig();
+        $config = $this->config['default'];
 
         $redis->connect($config['host'], $config['port'], $config['timeout']);
 
@@ -50,15 +49,5 @@ class RedisManager extends Manager
         }
 
         return $redis;
-    }
-
-    /**
-     * Get default configuration.
-     *
-     * @return array
-     */
-    protected function getDefaultConfig()
-    {
-        return $this->config->get('database.connections.redis.default');
     }
 }

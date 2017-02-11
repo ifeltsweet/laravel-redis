@@ -20,7 +20,13 @@ class RedisServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('FootyRoom\Support\Redis\RedisManager');
+        $this->app->singleton('LaravelRedis\RedisManager', function($app) {
+        	return new RedisManager($app['config']['database.redis']);
+        });
+
+        // To support default Illuminate Redis Facade and for those who expect 'redis'
+        // to be aliased. 
+    	$this->app->alias('LaravelRedis\RedisManager', 'redis');
     }
 
     /**
@@ -30,6 +36,6 @@ class RedisServiceProvider extends ServiceProvider
 	 */
 	public function provides()
 	{
-		return array('FootyRoom\Support\Redis\RedisManager');
+		return ['LaravelRedis\RedisManager', 'redis'];
 	}
 }
